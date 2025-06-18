@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Add Module to {{ course.title }}{% endblock %}
+{% block content %}
+<h2>Add Module to {{ course.title }}</h2>
+<form method="POST">
+    <label>Module Title:</label>
+    <input type="text" name="title" required><br>
+    <label>Module Description:</label>
+    <textarea name="description" required></textarea><br>
+    <label>YouTube Link:</label>
+    <input type="text" name="youtube_link" placeholder="https://www.youtube.com/watch?v=..."><br>
+    <input type="submit" value="Add Module">
+</form>
+<p><a href="{{ url_for('main.course_detail', course_id=course.id) }}">Back to Course Details</a></p>
+{% endblock %}

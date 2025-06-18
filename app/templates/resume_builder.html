@@ -1,0 +1,106 @@
+<!-- templates/resume_builder.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Building Guide</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        h2 {
+            color: #ff5722;
+            border-bottom: 2px solid #ff5722;
+            padding-bottom: 5px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .resume-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .resume-links a {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px;
+            text-decoration: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .resume-links a:hover {
+            background-color: #218838;
+        }
+        .btn-secondary {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #6c757d;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>How to Build a Strong Resume</h1>
+        <p>Follow these steps to create a compelling resume:</p>
+
+        <h2>Step 1: Contact Information</h2>
+        <p>Include your name, phone number, email, and LinkedIn profile.</p>
+
+        <h2>Step 2: Write a Strong Summary</h2>
+        <p>Summarize your skills, experience, and career goals in 2-3 sentences.</p>
+
+        <h2>Step 3: Work Experience</h2>
+        <p>List your previous jobs, including company name, job title, and responsibilities.</p>
+
+        <h2>Step 4: Education</h2>
+        <p>Include your degrees, certifications, and relevant coursework.</p>
+
+        <h2>Step 5: Skills</h2>
+        <p>Mention both technical and soft skills that are relevant to your job.</p>
+
+        <h2>Step 6: Projects</h2>
+        <p>Add details about projects you've worked on, including achievements.</p>
+
+        <!-- Online Resume Makers -->
+        <div class="resume-links">
+            <h2>Try These Online Resume Builders:</h2>
+            <a href="https://www.canva.com/resumes/templates/" target="_blank">Canva Resume Builder</a>
+            <a href="https://zety.com/resume-builder" target="_blank">Zety Resume Maker</a>
+            <a href="https://www.novoresume.com/resume-builder" target="_blank">Novoresume</a>
+        </div>
+
+        <a href="javascript:history.back()" class="btn-secondary">Back to Dashboard</a>
+    </div>
+</body>
+</html>

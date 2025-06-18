@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% block title %}Courses{% endblock %}
+{% block content %}
+<style>
+  /* Main Page Background */
+  body {
+    background-color: #E9F5DB; /* Light pastel green */
+  }
+
+  /* Add Course Box */
+  .add-course {
+    margin: 20px auto;
+    width: 420px;
+    background-color: #F2F2F2;
+    border: 3px solid #2A9D8F;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .add-course h3 {
+    color: #264653;
+    margin-bottom: 10px;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    border: 1px solid #264653;
+    border-radius: 5px;
+  }
+
+  input[type="submit"] {
+    background-color: #2A9D8F;
+    color: white;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #21867A;
+  }
+
+  /* Course List */
+  .courses-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .course-box {
+    background-color: #FAFAFA;
+    border: 2px solid #264653;
+    border-radius: 10px;
+    width: 320px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .course-box:hover {
+    transform: scale(1.05);
+  }
+
+  .course-box a {
+    text-decoration: none;
+    color: #E76F51;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .course-box a:hover {
+    color: #D62828;
+  }
+
+  .course-box p {
+    color: #555;
+    font-size: 0.9em;
+  }
+
+  .edit-btn {
+    display: block;
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #F4A261;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .edit-btn:hover {
+    background-color: #E76F51;
+  }
+
+  h3.center {
+    text-align: center;
+    color: #264653;
+    margin-bottom: 20px;
+  }
+
+  .back-link {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .back-link a {
+    color: #2A9D8F;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .back-link a:hover {
+    color: #21867A;
+  }
+</style>
+
+{% if session.get("role") == "admin" %}
+<div class="add-course">
+  <h3>Add New Course</h3>
+  <form method="POST">
+    <label>Course Title:</label><br>
+    <input type="text" name="title" required><br><br>
+
+    <label>Description:</label><br>
+    <textarea name="description" required></textarea><br><br>
+
+    <label>Course Content:</label><br>
+    <textarea name="content" placeholder="Detailed course content..."></textarea><br><br>
+
+    <label>Image URL:</label><br>
+    <input type="text" name="image_url" placeholder="http://example.com/image.jpg"><br><br>
+
+    <input type="submit" value="Add Course">
+  </form>
+</div>
+{% endif %}
+
+<h3 class="center">Existing Courses</h3>
+<div class="courses-container">
+  {% if courses %}
+    {% for course in courses %}
+      <div class="course-box">
+        <a href="{{ url_for('main.course_detail', course_id=course.id) }}">{{ course.title }}</a>
+        <p>{{ course.description }}</p>
+
+        {% if session.get("role") == "admin" %}
+          <!-- Edit Button for Admin -->
+          <button class="edit-btn" onclick="editCourse('{{ course.id }}', '{{ course.description }}')">Edit</button>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <p style="text-align: center;">No courses available.</p>
+  {% endif %}
+</div>
+
+<div class="back-link">
+  <p><a href="{{ url_for('main.dashboard') }}">Back to Dashboard</a></p>
+</div>
+
+<!-- JavaScript for Editing Course Description -->
+<script>
+  function editCourse(courseId, currentDesc) {
+    let newDesc = prompt("Edit Course Description:", currentDesc);
+    if (newDesc !== null && newDesc.trim() !== "") {
+      fetch(`/update_course/${courseId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ description: newDesc })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          location.reload();
+        } else {
+          alert("Failed to update course.");
+        }
+      });
+    }
+  }
+</script>
+{% endblock %}

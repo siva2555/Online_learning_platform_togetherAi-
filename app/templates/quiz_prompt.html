@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Quiz Prompt{% endblock %}
+{% block content %}
+<div class="card mx-auto" style="max-width: 600px;">
+  <div class="card-header bg-secondary text-white">
+    <h2 class="mb-0">Enter Quiz Prompt</h2>
+  </div>
+  <div class="card-body">
+    <form method="POST">
+      <div class="form-group">
+        <label for="prompt">Quiz Prompt:</label>
+        <textarea class="form-control" name="prompt" id="prompt" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Generate Quiz</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

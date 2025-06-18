@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Edit Module{% endblock %}
+{% block content %}
+<h2>Edit Module for {{ course.title }}</h2>
+<form method="POST">
+  <label for="title">Module Title:</label><br>
+  <input type="text" name="title" id="title" value="{{ module.title }}" required><br><br>
+  
+  <label for="description">Description:</label><br>
+  <textarea name="description" id="description" rows="4" cols="50" required>{{ module.description }}</textarea><br><br>
+  
+  <label for="youtube_link">YouTube Link:</label><br>
+  <input type="text" name="youtube_link" id="youtube_link" value="{{ module.youtube_link }}"><br><br>
+  
+  <input type="submit" value="Update Module" style="padding:10px 20px; background-color:#264653; color:#fff; border:none; border-radius:5px;">
+</form>
+<a href="{{ url_for('main.course_detail', course_id=course.id) }}">Back to Course Details</a>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}My Progress{% endblock %}
+{% block content %}
+<div class="card mx-auto" style="max-width: 900px;">
+  <div class="card-header bg-secondary text-white">
+    <h2 class="mb-0 text-center">My Course Progress</h2>
+  </div>
+  <div class="card-body">
+    {% if courses %}
+      {% for course in courses %}
+        <div class="mb-4 p-3 border rounded">
+          <h4>{{ course.title }}</h4>
+          <p>{{ course.description }}</p>
+          <div class="progress mb-2">
+            <div class="progress-bar" role="progressbar" style="width: {{ progress_data[course.id] }}%;" aria-valuenow="{{ progress_data[course.id] }}" aria-valuemin="0" aria-valuemax="100">
+              {{ progress_data[course.id] }}%
+            </div>
+          </div>
+          <a href="{{ url_for('main.course_detail', course_id=course.id) }}" class="btn btn-primary btn-sm">View Course</a>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="text-center">No courses available.</p>
+    {% endif %}
+  </div>
+  <div class="card-footer text-center">
+    <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-primary">Go to Home</a>
+  </div>
+</div>
+{% endblock %}

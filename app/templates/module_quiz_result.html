@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Module Quiz Results{% endblock %}
+{% block content %}
+<div class="card mx-auto" style="max-width: 800px;">
+  <div class="card-header bg-success text-white">
+    <h2 class="mb-0">Module Quiz Results for: {{ module.title }}</h2>
+  </div>
+  <div class="card-body">
+    <p>Your score: <strong>{{ score }}</strong> out of <strong>{{ total }}</strong></p>
+    {% for result in results %}
+      <div class="mb-3 p-3 border rounded" style="background-color: #f8f9fa;">
+        <p><strong>Question:</strong> {{ result.question }}</p>
+        <p><strong>Your Answer:</strong> {{ result.user_answer }}</p>
+        <p><strong>Correct Answer:</strong> {{ result.correct_answer }}</p>
+        {% if result.correct %}
+          <p class="text-success">Correct!</p>
+        {% else %}
+          <p class="text-danger">Incorrect.</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <a href="{{ url_for('main.course_detail', course_id=course.id) }}" class="btn btn-secondary">Back to Course</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Admin Module Quiz Prompt{% endblock %}
+{% block content %}
+<div class="card mx-auto" style="max-width: 600px;">
+  <div class="card-header bg-warning text-white">
+    <h2 class="mb-0">Create Quiz for Module: {{ module.title }}</h2>
+  </div>
+  <div class="card-body">
+    <form method="POST">
+      <div class="form-group">
+        <label for="prompt">Enter Quiz Prompt:</label>
+        <textarea name="prompt" id="prompt" class="form-control" rows="4" placeholder="e.g., Generate a multiple-choice quiz in JSON format about this module..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Generate Quiz</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
